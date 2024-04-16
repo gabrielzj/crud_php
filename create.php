@@ -18,17 +18,16 @@
     <?php
         //se o metodo post esta definido, ou seja, retorna true
         if(isset($_POST['submit_btn'])){
-            $tipo = $_POST['createtipo'];
-            $nome = $_POST['createname'];
+            $tipo = strtolower($_POST['createtipo']);
+            $nome = strtolower($_POST['createname']);
             if(empty($tipo) || empty($nome)) {
-                echo 'Todos os campos devem estar preenchidos';
+                echo "<script> alert('Existem campos vazios!') </script>";
             } else {
-                $query = "SELECT COUNT(*) FROM produto WHERE prod_nome = '$nome' ";
                 //insere dados na tabela id eh null pois eh auto-increment
                 $sql = $conn -> prepare("INSERT INTO produto VALUES (null,?,?)");
                 $sql -> execute(array($tipo,$nome));
                 echo "<script> alert('Produto cadastrado!') </script>";
-                echo "<scrpt>location.href = '?page=index'; </script>";
+                header("Location: index.php?page=index");
             }
         }
     ?>
