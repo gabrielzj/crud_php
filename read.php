@@ -14,7 +14,11 @@
         </div>
         <button type="submit" class="btn btn-primary" name="btn_read">Consultar</button>
     </form>
-    
+    <style>
+    .table-container {
+        margin-left: 200px;
+    }
+    </style>
     <?php
     //se o botão for pressionado, a variável está setada
         if(isset($_REQUEST["btn_read"])) {
@@ -37,8 +41,19 @@
                     if(count($data) == 0){
                         echo "Não foram encontrados resultados!";
                     } else {
+                        //exibe os dados em tabela
+                        echo "<div class='container text-center table-container'>";
+                        echo "<div class='row'>";
+                        echo "<div class='col'><h3><b>Nome</b></h3></div>";
+                        echo "<div class='col'><h3><b>Quantidade</b></h3></div>";
+                        echo "</div>";
                         foreach($data as $row) {
-                            echo "<b>Nome:</b>" . " " . $row['prod_nome'] . " " . "<b>Quantidade:</b>" . " " . $row['quant'] . "<br/>";
+                            echo "<div class='container text-center'>";
+                            echo "<div class='row'>";
+                            echo "<div class='col'>" . "<h3>".$row['prod_nome']."</h3>" . "</div>";
+                            echo "<div class='col'>" . "<h3>".$row['quant']."</h3>" ."</div>";
+                            echo "</div>";
+                            echo "</div>";
                         }
                     }
                 }
@@ -52,8 +67,24 @@
                     if(count($data) == 0) {
                         echo "Não foram encontrados resultados!";
                     } else {
+                        echo "<div class='container text-center table-container'>";
+                        echo "<div class='row'>";
+                        echo "<div class='col'><h3><b>Tipo</b></h3></div>";
+                        echo "<div class='col'><h3><b>Quantidade</b></h3></div>";
+                        echo "</div>";
                         foreach($data as $row) {
-                            echo "<b>Tipo:</b>" . " " . $row['prod_tipo'] . " " . "<b>Quantidade:</b>". " ".  $row['quant'] . "<br/>";
+                            // echo "<b>Tipo:</b>" . " " . $row['prod_tipo'] . " " . "<b>Quantidade:</b>". " ".  $row['quant'] . "<br/>";
+                            // echo "<tr>";
+                            // echo "<td>" . $row['prod_tipo'] . "</td>";
+                            // echo "<td></td>";
+                            // echo "<td>" . $row['quant'] . "</td>";
+                            // echo "</tr>";
+                            echo "<div class='container text-center'>";
+                            echo "<div class='row'>";
+                            echo "<div class='col'>" . "<h3>".$row['prod_tipo']."<h3>" . "</div>";
+                            echo "<div class='col'>" . "<h3>".$row['quant']."<h3>" ."</div>";
+                            echo "</div>";
+                            echo "</div>";
                         }
                     }
                 }            
