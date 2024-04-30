@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-    <form method="POST">
+    <form action="?page=create" method="POST">
         <div class="mb-3">
             <label for="inputTipo" class="form-label">Tipo</label>
             <input type="text" class="form-control" id="inputTipo" name="createtipo">
@@ -17,9 +17,9 @@
     </form>
     <?php
         //se o metodo post esta definido, ou seja, retorna true
-        if(isset($_POST['submit_btn'])){
-            $tipo = strtolower($_POST['createtipo']);
-            $nome = strtolower($_POST['createname']);
+        if(isset($_REQUEST['submit_btn'])){
+            $tipo = strtolower($_REQUEST['createtipo']);
+            $nome = strtolower($_REQUEST['createname']);
             if(empty($tipo) || empty($nome)) {
                 echo "<script> alert('Existem campos vazios!') </script>";
             } else {
