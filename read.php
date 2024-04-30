@@ -73,12 +73,6 @@
                         echo "<div class='col'><h3><b>Quantidade</b></h3></div>";
                         echo "</div>";
                         foreach($data as $row) {
-                            // echo "<b>Tipo:</b>" . " " . $row['prod_tipo'] . " " . "<b>Quantidade:</b>". " ".  $row['quant'] . "<br/>";
-                            // echo "<tr>";
-                            // echo "<td>" . $row['prod_tipo'] . "</td>";
-                            // echo "<td></td>";
-                            // echo "<td>" . $row['quant'] . "</td>";
-                            // echo "</tr>";
                             echo "<div class='container text-center'>";
                             echo "<div class='row'>";
                             echo "<div class='col'>" . "<h3>".$row['prod_tipo']."<h3>" . "</div>";
