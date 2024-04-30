@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-    <form method="GET">
+    <form action="?page=read" method="POST">
         <div class="mb-3">
             <label for="TipoConsulta" class="form-label">Tipo</label>
             <input type="text" class="form-control" id="TipoConsulta" name="readtipo">
@@ -17,10 +17,10 @@
     
     <?php
     //se o botão for pressionado, a variável está setada
-        if(isset($_GET['btn_read'])) {
+        if(isset($_REQUEST["btn_read"])) {
             //passa os valores dos inputs para lowercase
-            $rtipo = strtolower($_GET['readtipo']);
-            $rnome = strtolower($_GET['readnome']);
+            $rtipo = strtolower($_REQUEST["readtipo"]);
+            $rnome = strtolower($_REQUEST["readnome"]);
             
             if(empty($rtipo) && empty($rnome)) {
                 echo "<script> alert('Campos vazios!') </script>";
@@ -59,7 +59,6 @@
                 }            
             }
         }
-    ?>
-
+    ?>   
 </body>
 </html>
