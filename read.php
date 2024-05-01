@@ -3,6 +3,7 @@
 <head>
 </head>
 <body>
+    <h2>Consultar Produto</h2>
     <form action="?page=read" method="POST">
         <div class="mb-3">
             <label for="TipoConsulta" class="form-label">Tipo</label>
@@ -31,9 +32,9 @@
             } else {
                 //pesquisa de acordo com o tipo
                 if(!empty($rtipo)) {
-                    $query = "SELECT prod_nome, COUNT(*) AS quant FROM produto WHERE prod_tipo = :tipo GROUP BY prod_nome";
+                    $query = "SELECT prod_nome, prod_cod, COUNT(*) AS quant FROM produto WHERE prod_tipo = :tipo GROUP BY prod_nome, prod_cod";
                     $sql = $conn ->prepare($query);
-                    //bind de :nome como a variável $rnome
+                    //bind de :nome como a variável $rtipo
                     $sql -> bindParam(':tipo', $rtipo, PDO::PARAM_STR);
                     $sql -> execute();
                     //fetch por nome de coluna
@@ -46,12 +47,14 @@
                         echo "<div class='row'>";
                         echo "<div class='col'><h3><b>Nome</b></h3></div>";
                         echo "<div class='col'><h3><b>Quantidade</b></h3></div>";
+                        echo "<div class='col'><h3><b>ID</b></h3></div>";
                         echo "</div>";
                         foreach($data as $row) {
                             echo "<div class='container text-center'>";
                             echo "<div class='row'>";
-                            echo "<div class='col'>" . "<h3>".$row['prod_nome']."</h3>" . "</div>";
-                            echo "<div class='col'>" . "<h3>".$row['quant']."</h3>" ."</div>";
+                            echo "<div class='col'>" . "<h3>" . $row['prod_nome'] . "</h3>" . "</div>";
+                            echo "<div class='col'>" . "<h3>" . $row['quant'] . "</h3>" ."</div>";
+                            echo "<div class='col'>" . "<h3>" . $row['prod_cod'] . "</h3>" ."</div>";
                             echo "</div>";
                             echo "</div>";
                         }
@@ -59,7 +62,7 @@
                 }
                 //pesquisa feita de acordo com o nome    
                 if(!empty($rnome)) {
-                    $query = "SELECT prod_tipo, COUNT(*) AS quant FROM produto WHERE prod_nome = :nome GROUP BY prod_tipo";
+                    $query = "SELECT prod_tipo, prod_cod, COUNT(*) AS quant FROM produto WHERE prod_nome = :nome GROUP BY prod_tipo, prod_cod";
                     $sql = $conn ->prepare($query);
                     $sql -> bindParam(':nome', $rnome, PDO::PARAM_STR);
                     $sql -> execute();
@@ -71,12 +74,14 @@
                         echo "<div class='row'>";
                         echo "<div class='col'><h3><b>Tipo</b></h3></div>";
                         echo "<div class='col'><h3><b>Quantidade</b></h3></div>";
+                        echo "<div class='col'><h3><b>ID</b></h3></div>";
                         echo "</div>";
                         foreach($data as $row) {
                             echo "<div class='container text-center'>";
                             echo "<div class='row'>";
                             echo "<div class='col'>" . "<h3>".$row['prod_tipo']."<h3>" . "</div>";
                             echo "<div class='col'>" . "<h3>".$row['quant']."<h3>" ."</div>";
+                            echo "<div class='col'>" . "<h3>".$row['prod_cod']."<h3>" ."</div>";
                             echo "</div>";
                             echo "</div>";
                         }
