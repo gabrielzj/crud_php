@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 </head>
@@ -9,7 +9,7 @@
     <form action="?page=delete" method="POST">
         <div class="mb-3">
             <label for="Tipodelete" class="form-label">ID</label>
-            <input type="text" class="form-control" id="TipoDelete" name="deleteid">
+            <input type="text" class="form-control border-primary" id="Tipodelete" name="deleteid">
         </div>
         <button type="submit" class="btn btn-primary" name="btn_delete">Remover</button>
     </form>
@@ -18,7 +18,8 @@
 
         $dcod = strtolower($_REQUEST['deleteid']);
 
-        function deleteItem($dcod, $conn)
+        // deleta item pelo id
+        function deleteProduct($dcod, $conn)
         {
             $query = 'DELETE FROM produto WHERE prod_cod = :cod';
             $sql = $conn->prepare($query);
@@ -26,9 +27,9 @@
             $sql->execute();
         }
 
-        if (empty($dcod)) {
-            echo "<script> alert('Informe um Código!') </script>";
-        } else {
+        // pesquisa pelo id
+        function searchProduct($conn, $dcod)
+        {
             $query = 'SELECT prod_nome, prod_tipo, prod_cod FROM produto WHERE prod_cod = :cod';
             $sql = $conn->prepare($query);
             $sql->bindParam(':cod', $dcod, PDO::PARAM_INT);
@@ -39,11 +40,17 @@
                 $prod_nome = $data[0]['prod_nome'];
                 $prod_tipo = $data[0]['prod_tipo'];
                 $prod_cod = $data[0]['prod_cod'];
-                deleteItem($dcod, $conn);
+                deleteProduct($dcod, $conn);
                 echo "<h3>Item Removido</h3> </br> <b>Nome:</b> $prod_nome </br> <b>Tipo:</b> $prod_tipo </br> <b>ID:</b>$prod_cod";
             } else {
                 echo "<script> alert('Produto não encontrado!') </script>";
             }
+        }
+
+        if (empty($dcod)) {
+            echo "<script> alert('Informe um Código!') </script>";
+        } else {
+            searchProduct($conn, $dcod);
         }
     }
     ?>
